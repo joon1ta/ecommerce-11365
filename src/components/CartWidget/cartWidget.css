@@ -1,0 +1,11 @@
+.Cart {
+    
+    margin-right: 18px;
+    
+}
+
+.Cart:hover {
+    color: whitesmoke;
+    cursor: pointer;
+}
+
