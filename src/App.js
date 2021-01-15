@@ -1,16 +1,15 @@
 
 import './App.css';
 import  { NavBar} from './components/NavBar/NavBAr'
-import { Home } from './components/Home/home'
-import ItemListContainer from './ItemListContainer/itemListContainer'
+import {Home} from "./components/Home/home"
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      <Home>
-      <ItemListContainer  greeting={"Welcome!, we are in maintenance"} />
-      </Home>
+     
+    <Home />
+     
       
     </div>
   );
