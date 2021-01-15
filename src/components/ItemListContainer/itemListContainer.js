@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import {ItemList} from './'
+import {ItemList} from '../ItemList/ItemList'
 
 const productos = [{
     id: 1,
@@ -34,7 +34,7 @@ const productos = [{
 
 
 
-export const ItemListContainer = ( {greeting} ) => {
+const ItemListContainer = ( ) => {
 
     const [items, setItems] = useState([])
 useEffect(() => {
@@ -59,3 +59,4 @@ useEffect(() => {
     ) 
 }
 
+export default ItemListContainer
