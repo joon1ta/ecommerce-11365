@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components';
 
 const StyleCount = styled.div`
@@ -29,16 +29,9 @@ const StyleCount = styled.div`
   }
 `;
 
-const ItemCount = ({maxStock, minStock})=> {
+const ItemCount = ({increase, decrease, onAdd, count})=> {
 
-const [counter, setCounter] = useState(minStock)
 
-const increase = () => {
-    counter < maxStock && setCounter(counter + 1)
-}
-const decrease = () => {
-    counter > minStock && setCounter(counter - 1)
-}
 
     return (
         <StyleCount>
@@ -46,10 +39,10 @@ const decrease = () => {
            
             <div className="buttons">
             <span onClick={decrease}>-</span>
-            <h5>{counter}</h5>
+            <h5>{count}</h5>
             <span onClick={increase}>+</span>
             </div>
-            <button className="btn btn-primary">Add to Cart</button>
+            <button onClick={onAdd} className="btn btn-primary">Add to Cart</button>
         </div>
         </StyleCount>        
             ) 
