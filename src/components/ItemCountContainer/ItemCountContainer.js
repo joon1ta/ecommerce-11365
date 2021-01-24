@@ -13,7 +13,7 @@ const decrease = () => {
     counter > minStock && setCounter(counter - 1)
 }
 
-    const onAdd = () => {
+const onAdd = () => {
 
         counter <= maxStock ? alert(`Agregaste ${counter} al carrito`) : alert(`La cantidad ingresada es mayor a nuestro stock disponible`);
     };

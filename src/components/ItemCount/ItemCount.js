@@ -13,13 +13,13 @@ const StyleCount = styled.div`
 
   .buttons {
     display: flex;
-    width: 20%;
+    width: 15%;
     justify-content: space-between;
 
     span {
       border-radius: 27px;
-      font-size: 2rem;
-      padding: 2rem;
+      font-size: 1.3rem;
+      padding: 1.3rem;
       user-select: none;
 
       &:hover {
