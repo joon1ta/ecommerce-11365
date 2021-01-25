@@ -5,12 +5,12 @@ import {Link} from 'react-router-dom'
 
 
 
-const Item = ({ title, desc, price, item }) => {
+const Item = ({title, description, price, pictureUrl, id }) => {
   return (
   
       <div style={{marginBottom: 35,display: 'inline-block' }} >
         <Link to={'/itemDetail'}>
-        <img style={{padding: 15,width: 300,height: 450}} src={item} alt={title}/>
+        <img style={{padding: 15,width: 300,height: 450}} src={id} alt={id}/>
         </Link>
         <h5 >{title}</h5>
         <p>Precio: ${price}</p>
@@ -18,7 +18,7 @@ const Item = ({ title, desc, price, item }) => {
                    minStock={1}
         
         />
-        <p>Estilo: {desc}</p>
+        <p>Estilo: {description}</p>
       <div >
         <button className="btn btn-primary">Comprar</button>
       </div>
