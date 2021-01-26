@@ -2,7 +2,7 @@ import React from 'react'
 
 import {CountContainer} from "../ItemCountContainer/ItemCountContainer"
 
-const ItemDetail = ({ title, description, price, pictureUrl, id}) => {
+const ItemDetail = ({item: {title,price,description,pictureUrl,id}}) => {
 
 
     return (
