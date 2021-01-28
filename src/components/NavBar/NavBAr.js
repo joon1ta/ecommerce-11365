@@ -1,32 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './navbar.css'
+
 import CartWidget from '../CartWidget/cartWidget'
-import { Navbar, Nav, Form, FormControl, Button, NavDropdown } from 'react-bootstrap';
+import {NavLink} from 'react-router-dom'
+
+
+
+
+
+
 
 export const NavBar = () => {
 
-    return <>
-      <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="#home">StoreForGamers</Navbar.Brand>
-      <Nav className="mr-auto">
-      <NavDropdown title="Categories" id="nav-dropdown">
-        <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
-        <NavDropdown.Item eventKey="4.2">Strategies</NavDropdown.Item>
-        <NavDropdown.Item eventKey="4.3">Simulation</NavDropdown.Item>
-        <NavDropdown.Item eventKey="4.4">Shooter</NavDropdown.Item>
-        <NavDropdown.Item eventKey="4.5">Best Sellers</NavDropdown.Item>
-      </NavDropdown>
-        <Nav.Link href="#features">News</Nav.Link>
-        <Nav.Link href="#pricing">Help</Nav.Link>
-      </Nav>
-      <CartWidget />
-      <Form inline>
-        
-        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-        <Button variant="outline-info">Search game</Button>
-      </Form>
-    </Navbar>
-    </>     
+const [links, setLinks] = useState([
+  {nombre: 'Quienes Somos', url: '/aboutUs'},
+  {nombre: 'Categorias', url: '/categorias'},
+  {nombre: 'Contacto', url: 'contacto'}
+])
+
+
+
+    return <header>
+     <nav className="navbar-items">
+       <NavLink to='/' className="navBar-logo">
+         <h4>GamerStore</h4>
+       </NavLink>
+       <ul className="nav-menu">
+         {links.map((link, i) => {
+           return (<li key={i}><NavLink className="nav-link" to={link.url}>{link.nombre}</NavLink></li>)
+         })}
+         <NavLink to='/carrito'><CartWidget/></NavLink>
+       </ul>
+     </nav>
+    </header>     
            
     
 }
