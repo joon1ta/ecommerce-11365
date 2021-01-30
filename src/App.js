@@ -15,7 +15,7 @@ function App() {
    
     <Switch>
          
-          <Route path="/itemDetail/:productId">
+          <Route path="/itemDetail/:id">
           <ItemDetailContainer />
           </Route>
 

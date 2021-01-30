@@ -18,6 +18,7 @@ useEffect(() => {
        setItems(response)
        console.log(response)
     })
+    
 },[])
 
 
@@ -30,9 +31,9 @@ useEffect(() => {
         
         {items && items.map(item => 
         <Item  
-             
+        key={item.id}
         description={item.description}
-              key={item.id}
+              id={item.id}
               pictureUrl={item.pictureUrl}
               price={item.price}
               title={item.title}  

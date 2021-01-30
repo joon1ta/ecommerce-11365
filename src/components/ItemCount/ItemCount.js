@@ -42,7 +42,7 @@ const ItemCount = ({increase, decrease, onAdd, count})=> {
             <h5>{count}</h5>
             <span onClick={increase}>+</span>
             </div>
-            <button onClick={onAdd} className="btn btn-primary">Add to Cart</button>
+            <button  onClick={onAdd} className="btn btn-primary">Add to Cart</button>
         </div>
         </StyleCount>        
             ) 

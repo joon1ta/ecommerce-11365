@@ -3,40 +3,33 @@ import {useParams} from 'react-router-dom'
 import {Products} from '../../listProducts';
 import ItemDetail from '../ItemDetail/itemDetail' ;
 
-const getItem = (productId) => {
-    return new Promise(result => setTimeout(()=>
-    { result(Products.find(product => 
-        product.id===parseInt(productId)))
-
-    },1000))
-}
-   
 
 
-const ItemDetailContainer = () => {
-   const [loading, setLoading] = useState(false)
-    const[item, setItem] = useState([]);
-
-const {productId} = useParams();
-   
 
 
-    useEffect(() =>{
-       setLoading(true);
-        getItem(productId).then((product) => {
-           
-            setItem(product);
-            setLoading(false)
-           
-         
-        });
-    }, [productId])
+
+
+ const ItemDetailContainer = () => {
+
+  
+ 
+
+  const [items, setItems] = useState([])
+  const{id} = useParams()
+useEffect(() => {
+    const promise = new Promise ((resolve, reject) => {
+        setTimeout(() => {
+    resolve(Products)
+        }, 1000)
+    })
     
-
-    return (
-        <>
-        {loading ? "Buscando su Juego.." : <ItemDetail item={item} /> }
-        </>
-    )
-}
-export default ItemDetailContainer;
+    promise.then((response) => {
+       setItems(response[id-1])
+       console.log(response)
+    })
+},[id])
+      return (<><ItemDetail item={items} /></>)
+    }
+    
+   
+    export default ItemDetailContainer
