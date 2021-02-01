@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './navbar.css'
 
 import CartWidget from '../CartWidget/cartWidget'
 import {NavLink} from 'react-router-dom'
+import {Dropdown} from 'react-bootstrap'
 
 
 
@@ -12,23 +13,46 @@ import {NavLink} from 'react-router-dom'
 
 export const NavBar = () => {
 
-const [links, setLinks] = useState([
-  {nombre: 'Quienes Somos', url: '/aboutUs'},
-  {nombre: 'Categorias', url: '/categorias'},
-  {nombre: 'Contacto', url: 'contacto'}
-])
+const links  = [
+  
+ 
+  {nombre: 'Action', url: 'Action-FPS'},
+  {nombre: 'Sports', url: 'Sports'},
+  {nombre: 'Strategies', url: 'Strategies'},
+  {nombre: 'Arcade', url: 'Arcade'}
+  
+]
 
 
 
     return <header>
      <nav className="navbar-items">
+    
        <NavLink to='/' className="navBar-logo">
          <h4>GamerStore</h4>
        </NavLink>
+
+
        <ul className="nav-menu">
-         {links.map((link, i) => {
-           return (<li key={i}><NavLink className="nav-link" to={link.url}>{link.nombre}</NavLink></li>)
-         })}
+       <NavLink to='/contacto' className="navBar-logo">
+         <h6>Contacto</h6>
+       </NavLink>
+       <NavLink to='/aboutUs' className="navBar-logo">
+         <h6>Quienes somos</h6>
+       </NavLink>
+       <Dropdown>
+          <Dropdown.Toggle id="dropdown-basic">
+              Categorias
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1"> {links.map((link, i) => {
+                  return (<li key={i}><NavLink className="nav-link" to={link.url}>{link.nombre}</NavLink></li>)})}
+              </Dropdown.Item>
+   
+          </Dropdown.Menu>
+       </Dropdown>
+     
          <NavLink to='/carrito'><CartWidget/></NavLink>
        </ul>
      </nav>

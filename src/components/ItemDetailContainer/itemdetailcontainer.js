@@ -20,7 +20,7 @@ useEffect(() => {
     const promise = new Promise ((resolve, reject) => {
         setTimeout(() => {
     resolve(Products)
-        }, 1000)
+        }, 500)
     })
     
     promise.then((response) => {

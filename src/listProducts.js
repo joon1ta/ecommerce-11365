@@ -1,7 +1,7 @@
 export const Products = [{
     id: 1,
     title: "Call of Duty",
-    description: "Action Fps",
+    description: "Action-FPS",
     price: 50,
     pictureUrl: "https://i.imgur.com/3ioRBEr.jpg"
 }, 

@@ -1,12 +1,12 @@
 import React from 'react';
-import {CountContainer} from '../ItemCountContainer/ItemCountContainer';
+
 import {Link} from 'react-router-dom'
 
 
 
 
 const Item = ({title, description, price, pictureUrl, id }) => {
-  console.log(id)
+  
   return (
   
       <div style={{marginBottom: 35,display: 'inline-block' }} >

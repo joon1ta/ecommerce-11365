@@ -1,50 +1,24 @@
 import React from 'react'
-import styled from 'styled-components';
 
-const StyleCount = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 
-  h2 {
-    font-size: 8rem;
-  }
 
-  .buttons {
-    display: flex;
-    width: 15%;
-    justify-content: space-between;
 
-    span {
-      border-radius: 27px;
-      font-size: 1.3rem;
-      padding: 1.3rem;
-      user-select: none;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-`;
-
-const ItemCount = ({increase, decrease, onAdd, count})=> {
+const ItemCount = ({minStock,maxStock, increase, decrease, onAdd, count})=> {
 
 
 
     return (
-        <StyleCount>
+      
         <div>
-           
-            <div className="buttons">
-            <span onClick={decrease}>-</span>
-            <h5>{count}</h5>
-            <span onClick={increase}>+</span>
+            <h5>Cantidad:</h5>
+            <div className="buttons" style={{display:"flex",justifyContent:"center",margin:"10px 0 10px 0"}}>
+            <button className="btn btn-primary" onClick={decrease} disabled={count === minStock}>-</button>
+            <h5 style={{margin:"5px 5px 0 5px"}}>{count}</h5>
+            <button className="btn btn-primary" onClick={increase} disabled={count === maxStock}>+</button>
             </div>
             <button  onClick={onAdd} className="btn btn-primary">Add to Cart</button>
         </div>
-        </StyleCount>        
+             
             ) 
 
 }

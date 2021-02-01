@@ -1,10 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
+import ItemCount from '../ItemCount/ItemCount'
 
-import {CountContainer} from "../ItemCountContainer/ItemCountContainer"
+import {Link} from 'react-router-dom'
 
 const ItemDetail = ({item}) => {
+const minStock = 0
+const maxStock = 10
+const [counter, setCounter] = useState(minStock)
+const [add, setAdd] = useState(false)
 
+const increase = () => {
+    counter < maxStock && setCounter(counter + 1)
+}
+const decrease = () => {
+    counter > minStock && setCounter(counter - 1)
+}
 
+const onAdd = () => {
+
+        counter <= maxStock ? alert(`Agregaste ${counter} al carrito`) : alert(`La cantidad ingresada es mayor a nuestro stock disponible`);
+        if (counter > 0)
+        {setAdd(true)}
+    };
 
 
 
@@ -16,11 +33,14 @@ const ItemDetail = ({item}) => {
        
         <h5 >{item.title}</h5>
         <p>Precio: ${item.price}</p>
-        <CountContainer maxStock={10}
-                   minStock={1}
-        
-        />
+        <p>Disponibles: {maxStock}</p>
         <p>Estilo: {item.description}</p>
+
+        { add ?
+        <Link to="/carrito">
+           <button className="btn btn-primary">Finalizar Compra</button>
+        </Link> : <ItemCount decrease={decrease} increase={increase} onAdd={onAdd} count={counter} minStock={minStock} maxStock={maxStock} /> 
+        }
      
       </div>
     )
