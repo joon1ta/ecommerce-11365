@@ -7,15 +7,17 @@ import ItemDetailContainer from './components/ItemDetailContainer/itemdetailcont
 import Quienes from './components/AboutUS/aboutUs'
 import Cart from './components/Cart/cart'
 import { ItemListContainer } from './components/ItemListContainer/ItemListContainer';
+import {StoreProvider} from './components/Context/cartContext'
 
 function App() {
   return (
     <div className="App">
-<Router>
-    <NavBar />
+      <StoreProvider>
+       <Router>
+           <NavBar />
      
    
-    <Switch>
+         <Switch>
          
           <Route path="/itemDetail/:id">
           <ItemDetailContainer />
@@ -44,7 +46,7 @@ function App() {
     </Switch>
      
 </Router>     
-      
+</StoreProvider>
     </div>
   );
 }
