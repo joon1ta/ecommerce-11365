@@ -7,7 +7,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 const Cart = () => {
 
-const {productos, borrarItem} = useCartContext()
+const {productos, borrarItem, priceTotal, isInCart} = useCartContext()
 
 const handleBorrar = (i) => {
     borrarItem(i.id)
@@ -39,12 +39,31 @@ const handleBorrar = (i) => {
                             <FontAwesomeIcon icon={faTrashAlt} />
                         </button>
                     </div>
-                    <div> <p>Precio: ${item.price}</p></div>
+                    <div> <p>Precio unidad: ${item.price}</p></div>
+                    <div> <p>Precio total: ${item.quantity*item.price}</p></div>
                  </div>
                  )
                )}
 
            </div>
+
+           {isInCart ?  
+           <div>
+                    <div>
+                        <label>Subtotal</label>
+                        <div>{priceTotal()}</div>
+                    </div>
+                    <div>
+                        <label>Costo de envío</label>
+                        <div>5000</div>
+                    </div>
+                    <div>
+                        <label>Total a Pagar</label>
+                        <div>{priceTotal() + 5000}</div>
+                    </div>
+            </div>
+                : "Aun no tiene productos agregados..."
+            }
         </section>
 
     )

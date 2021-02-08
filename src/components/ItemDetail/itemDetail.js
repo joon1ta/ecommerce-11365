@@ -6,36 +6,25 @@ import {Link} from 'react-router-dom'
 const ItemDetail = ({item}) => {
 const minStock = 0
 const maxStock = 10
-const [counter, setCounter] = useState(minStock)
+
 const [add, setAdd] = useState(false)
-const [stock, setStock] = useState(maxStock)
-const [quantity, setQuantity] = useState(0)
+
+const [quantity, setQuantity] = useState(1)
 const { agregarItem } = useCartContext()
 
-const increase = () => {
-    counter < maxStock && setCounter(counter + 1)
-    counter < maxStock && setStock(stock - 1)
-}
-const decrease = () => {
-    counter > minStock && setCounter(counter - 1)
-    counter > minStock && setStock(counter + 1)
+const cantidadItem = (counter) => {
+  setQuantity(counter)
 }
 
-const onAdd = () => {
 
-        counter <= maxStock ? alert(`Agregaste ${counter} al carrito`) : alert(`La cantidad ingresada es mayor a nuestro stock disponible`);
-        if (counter > 0)
-        {setAdd(true)
-         setQuantity(counter) 
-        }
-    };
 const agregarAlCarrito = () => {
   agregarItem(item, quantity)
+  setAdd(true)
 }   
 
 
 
-  console.log(item)
+ 
     return (
         <div style={{marginBottom: 35,display: 'inline-block' }} >
        
@@ -45,12 +34,15 @@ const agregarAlCarrito = () => {
         <p>Precio: ${item.price}</p>
         <p>Disponibles: {maxStock}</p>
         <p>Estilo: {item.description}</p>
-       
-        { add ?
-        <Link to="/carrito">
-           <button className="btn btn-primary" onClick={agregarAlCarrito}>Finalizar Compra</button>
-        </Link> :  <ItemCount  decrease={decrease} increase={increase} onAdd={onAdd} count={counter} minStock={minStock} maxStock={maxStock} />  
-        }
+        <ItemCount  maxStock={maxStock}
+                    stock={maxStock}
+                    minStock={minStock}
+                    onAdd={cantidadItem}
+        />
+       <button className="btn btn-primary" onClick={agregarAlCarrito}>Agregar al carrito</button>
+        { add ?<Link to={'/carrito'}><button className="btn btn-primary" onClick={agregarAlCarrito}>Finalizar Compra</button></Link> 
+        : null
+       }
      
       </div>
     )

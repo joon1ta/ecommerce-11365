@@ -53,7 +53,7 @@ const links  = [
           </Dropdown.Menu>
        </Dropdown>
      
-         <NavLink to='/carrito'><CartWidget/></NavLink>
+         <CartWidget/>
        </ul>
      </nav>
     </header>     
