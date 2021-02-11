@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 const ItemDetail = ({item}) => {
 const minStock = 0
-const maxStock = 10
+const maxStock = item.stock
 
 const [add, setAdd] = useState(false)
 
@@ -35,7 +35,7 @@ const agregarAlCarrito = () => {
         <p>Disponibles: {maxStock}</p>
         <p>Estilo: {item.description}</p>
         <ItemCount  maxStock={maxStock}
-                    stock={maxStock}
+                   
                     minStock={minStock}
                     onAdd={cantidadItem}
         />

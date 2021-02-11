@@ -1,19 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useCartContext from '../Context/cartContext'
 import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import { getFirestore } from '../../firebase'
+import Formulario from '../Formulario/Formulario'
 
 
 const Cart = () => {
 
-const {productos, borrarItem, priceTotal, isInCart} = useCartContext()
+const {productos, borrarItem, priceTotal, isInCart, limpiarListCart} = useCartContext()
+const [mostrarForm, setMostrarForm] = useState(false)
+const [orderId, setOrderId] = useState('')
+const [confirmation, setConfirmation] = useState('')
 
 const handleBorrar = (i) => {
     borrarItem(i.id)
 }
 
+const handleFinalize = () => {
+    setMostrarForm(true)
+}
 
+
+async function crearOrder(comprador) {
+    const newOrder = {
+        comprador,
+        productos,
+        date: firebase.firestore.Timestamp.fromDate(new Date()),
+        total: priceTotal()
+    }
+    const db = getFirestore()
+    const orders = db.collection('order')
+
+    try {
+        const doc = await orders.add(newOrder)
+        setOrderId(doc.id)
+        setConfirmation(true)
+    } catch(err) {
+        console.log('Error en la orden', err)
+    }
+}
+if(confirmation) {
+    alert('Su numero de Orden' + orderId + 'ha sido procesada con exito')
+    limpiarListCart()
+}
 
     return(
         <section>
@@ -55,12 +88,16 @@ const handleBorrar = (i) => {
                     </div>
                     <div>
                         <label>Costo de envío</label>
-                        <div>5000</div>
+                        <div>150</div>
                     </div>
                     <div>
                         <label>Total a Pagar</label>
-                        <div>{priceTotal() + 5000}</div>
+                        <div>{priceTotal() + 150}</div>
                     </div>
+                    <div>
+                        <button className="btn btn-primary" onClick={handleFinalize}>Proceder a la compra</button>
+                    </div>
+                    {mostrarForm ? <Formulario crearOrder={crearOrder}/> : null}
             </div>
                 : "Aun no tiene productos agregados..."
             }

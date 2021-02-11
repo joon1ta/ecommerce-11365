@@ -5,15 +5,15 @@ import React, {useState} from 'react'
 
 const ItemCount = ({minStock,maxStock,onAdd})=> {
     const [counter, setCounter] = useState(minStock)
-    const [stock, setStock] = useState(maxStock)
+    
 
     const increase = () => {
         counter < maxStock && setCounter(counter + 1)
-        counter < maxStock && setStock(stock - 1)
+       
     }
     const decrease = () => {
         counter > minStock && setCounter(counter - 1)
-        counter > minStock && setStock(counter + 1)
+      
     }
 
     onAdd(counter)
@@ -26,7 +26,7 @@ const ItemCount = ({minStock,maxStock,onAdd})=> {
             <h5 style={{margin:"5px 5px 0 5px"}}>{counter}</h5>
             <button className="btn btn-primary" onClick={increase} disabled={counter === maxStock}>+</button>
             </div>
-            <p>Unidades Disponibles: { stock-minStock }</p>
+            <p>Unidades Disponibles: { maxStock-counter }</p>
         </div>
              
             ) 

@@ -22,7 +22,7 @@ useEffect(() => {
  const getItem = db.collection('items').doc(id)
 
  getItem.get().then((querySnapshot) => {
-   setItems(querySnapshot.data())
+   setItems({id:querySnapshot.id, ...querySnapshot.data()})
    setLoading(false)
  })
  .catch((err) => {console.log(err)})
