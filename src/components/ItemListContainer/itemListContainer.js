@@ -2,6 +2,7 @@ import { React, useState, useEffect} from "react";
 import {Products} from '../../listProducts'
 import {useParams} from 'react-router-dom'
 import {ItemList} from '../ItemList/ItemList'
+import { getFirestore } from '../../firebase'
 
 
 
@@ -15,17 +16,21 @@ export const ItemListContainer = ( ) => {
    
 
     useEffect(() => {
-        const promise = new Promise ((resolve, reject) => {
-            setTimeout(() => {
-        resolve(Products)
-            }, 500)
-        })
-        
-        promise.then((response) => {
-            let itemsCategory = Products.filter (producto => producto.description === `${descriptionType}`)
-                itemsCategory.length > 0 ? setItems(itemsCategory) : setItems(Products) ;
-           console.log(response)
-        })
+      const db = getFirestore()
+      let items
+
+      if (descriptionType){
+          items = db.collection('items').where('category', '==', descriptionType)
+      } else {
+          items = db.collection('items')
+      }
+
+      const itemCollectionQuery = items.get()
+
+      itemCollectionQuery.then((querySnapshot) => {
+          setItems(querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id})))
+      })
+      .catch((err) => {console.log(err)})
         
     },[descriptionType])
 

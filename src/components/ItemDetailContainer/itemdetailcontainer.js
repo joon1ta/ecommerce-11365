@@ -1,15 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom'
-import {Products} from '../../listProducts';
+//import {Products} from '../../listProducts';
 import ItemDetail from '../ItemDetail/itemDetail' ;
+import { getFirestore } from '../../firebase'
 
 
-const getItem = (id) => {
-    return new Promise(result => setTimeout(() =>
-    { result(Products.find(product =>
-        product.id===parseInt(id)))
-    }, 500))
-}
+
 
 
 
@@ -22,11 +18,14 @@ const getItem = (id) => {
 
 
 useEffect(() => {
-  setLoading(true);
-  getItem(id).then((product) => {
-      setItems(product)
-      setLoading(false)
-  });
+ const db = getFirestore()
+ const getItem = db.collection('items').doc(id)
+
+ getItem.get().then((querySnapshot) => {
+   setItems(querySnapshot.data())
+   setLoading(false)
+ })
+ .catch((err) => {console.log(err)})
 }, [id])
    
       return (
