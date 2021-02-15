@@ -16,7 +16,7 @@ const agregarItem = ( item, quantity ) => {
     const inCart = productos.find((i) => i.id === item.id)
     setIsInCart(true)
     if(inCart) {
-        inCart.quantity += quantity
+        inCart.quantity = quantity
         setProductos([...productos])
     } else {
         setProductos([...productos, {...item, quantity}])

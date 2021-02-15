@@ -1,4 +1,4 @@
-export const Products = [{
+/*export const Products = [{
     id: 1,
     title: "Call of Duty",
     description: "Action-FPS",
@@ -26,3 +26,4 @@ export const Products = [{
     price: 50,
     pictureUrl: "https://i.imgur.com/o72LVj2.jpg"
 }]
+*/

@@ -9,7 +9,7 @@ const maxStock = item.stock
 
 const [add, setAdd] = useState(false)
 
-const [quantity, setQuantity] = useState(1)
+const [quantity, setQuantity] = useState(0)
 const { agregarItem } = useCartContext()
 
 const cantidadItem = (counter) => {
@@ -40,7 +40,7 @@ const agregarAlCarrito = () => {
                     onAdd={cantidadItem}
         />
        <button className="btn btn-primary" onClick={agregarAlCarrito}>Agregar al carrito</button>
-        { add ?<Link to={'/carrito'}><button className="btn btn-primary" onClick={agregarAlCarrito}>Finalizar Compra</button></Link> 
+        { add ? <Link to={'/carrito'}><button className="btn btn-primary" onClick={agregarAlCarrito}>Finalizar Compra</button></Link> 
         : null
        }
      
