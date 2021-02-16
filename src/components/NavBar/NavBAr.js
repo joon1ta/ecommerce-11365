@@ -16,10 +16,10 @@ export const NavBar = () => {
 const links  = [
   
  
-  {nombre: 'Action', url: 'Action-FPS'},
-  {nombre: 'Sports', url: 'Sports'},
-  {nombre: 'Strategies', url: 'Strategies'},
-  {nombre: 'Arcade', url: 'Arcade'}
+  {nombre: 'Action', url: '/category/Action-FPS'},
+  {nombre: 'Sports', url: '/category/Sports'},
+  {nombre: 'Strategies', url: '/category/Strategies'},
+  {nombre: 'Arcade', url: '/category/Arcade'}
   
 ]
 

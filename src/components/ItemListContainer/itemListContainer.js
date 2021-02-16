@@ -12,15 +12,15 @@ import { getFirestore } from '../../firebase'
 export const ItemListContainer = ( ) => {
 
     const [items, setItems] = useState([])
-    const{descriptionType} = useParams()
+    const{description} = useParams()
    
 
     useEffect(() => {
       const db = getFirestore()
       let items
 
-      if (descriptionType){
-          items = db.collection('items').where('category', '==', descriptionType)
+      if (description){
+          items = db.collection('items').where('category', '==', description)
       } else {
           items = db.collection('items')
       }
@@ -32,7 +32,7 @@ export const ItemListContainer = ( ) => {
       })
       .catch((err) => {console.log(err)})
         
-    },[descriptionType])
+    },[description])
 
 
 

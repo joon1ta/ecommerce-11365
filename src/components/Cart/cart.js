@@ -11,10 +11,10 @@ import Formulario from '../Formulario/Formulario'
 
 const Cart = () => {
 
-const {productos, borrarItem, priceTotal, isInCart, limpiarListCart} = useCartContext()
+const {productos, borrarItem, priceTotal, limpiarListCart} = useCartContext()
 const [mostrarForm, setMostrarForm] = useState(false)
 const [orderId, setOrderId] = useState('')
-const [confirmation, setConfirmation] = useState('')
+const [confirmation, setConfirmation] = useState(false)
 
 const handleBorrar = (i) => {
     borrarItem(i.id)
@@ -25,29 +25,59 @@ const handleFinalize = () => {
 }
 
 
-async function crearOrder(comprador) {
+const crearOrder = (comprador) => {
+    const db = getFirestore()
+    const orders = db.collection('order')
+
     const newOrder = {
         comprador,
         productos,
         date: firebase.firestore.Timestamp.fromDate(new Date()),
         total: priceTotal()
     }
-    const db = getFirestore()
-    const orders = db.collection('order')
-
-    try {
-        const doc = await orders.add(newOrder)
-        setOrderId(doc.id)
+    orders.add(newOrder).then(({id}) => {
+        setOrderId(id)
         setConfirmation(true)
-    } catch(err) {
-        console.log('Error en la orden', err)
     }
-}
-if(confirmation) {
-    alert('Su numero de Orden' + orderId + 'ha sido procesada con exito')
-    limpiarListCart()
+    ).catch((e) => {console.log(e)})
+       
+  const Itemscollection = db.collection('items')
+  const batch = getFirestore().batch()
+
+  productos.forEach( p => {
+      batch.update(Itemscollection.doc(p.id), {stock:p.stock - p.quantity})
+  })
+  batch.commit()
+        .then(() => {
+            console.log("Finalizado")
+            limpiarListCart()
+        }).catch(err=>console.log(err))
 }
 
+if(productos.lenght === 1 && orderId === "") {
+    return (
+        <div>
+            <div>
+                <h3>...No hay productos agregados al Carrito...</h3>
+                <Link to="/" exact>
+                    <button className = "btn btn-secondary">Continuar Comprando</button>
+                </Link>
+            </div>
+            
+        </div>
+    )
+} else if (orderId && confirmation) {
+    return(
+        <div>
+            <div>
+                <h3>Su Orden No. <span>{orderId}</span> ha sido confirmada</h3>
+                <Link to="/" exact>
+                    <button className="btn btn-secondary">Continuar Comprando</button>
+                </Link>
+            </div>
+        </div>
+    )
+}
     return(
         <section>
            <div>
@@ -80,10 +110,10 @@ if(confirmation) {
 
            </div>
 
-           {isInCart ?  
+         
            <div>
-                    <div>
-                        <label>Subtotal</label>
+                <div>
+                    <label>Subtotal</label>
                         <div>{priceTotal()}</div>
                     </div>
                     <div>
@@ -97,10 +127,10 @@ if(confirmation) {
                     <div>
                         <button className="btn btn-primary" onClick={handleFinalize}>Proceder a la compra</button>
                     </div>
-                    {mostrarForm ? <Formulario crearOrder={crearOrder}/> : null}
+                   
             </div>
-                : "Aun no tiene productos agregados..."
-            }
+              
+            {mostrarForm ? <Formulario crearOrder={crearOrder}/> : null}
         </section>
 
     )
