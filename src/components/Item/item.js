@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 
 
-const Item = ({title, description, price, pictureUrl, id }) => {
+const Item = ({item: {title, description, price, pictureUrl, id }}) => {
   
   return (
   

@@ -13,7 +13,7 @@ const Cart = () => {
 
 const {productos, borrarItem, priceTotal, limpiarListCart} = useCartContext()
 const [mostrarForm, setMostrarForm] = useState(false)
-const [orderId, setOrderId] = useState('')
+const [orderId, setOrderId] = useState("")
 const [confirmation, setConfirmation] = useState(false)
 
 const handleBorrar = (i) => {
@@ -35,9 +35,11 @@ const crearOrder = (comprador) => {
         date: firebase.firestore.Timestamp.fromDate(new Date()),
         total: priceTotal()
     }
-    orders.add(newOrder).then(({id}) => {
+    orders.add(newOrder).then(({ id }) => {
+       
         setOrderId(id)
         setConfirmation(true)
+     
     }
     ).catch((e) => {console.log(e)})
        
@@ -54,7 +56,11 @@ const crearOrder = (comprador) => {
         }).catch(err=>console.log(err))
 }
 
-if(productos.lenght === 1 && orderId === "") {
+
+
+
+if(productos.lenght === 0 && orderId === "") {
+    console.log(productos)
     return (
         <div>
             <div>
@@ -104,13 +110,15 @@ if(productos.lenght === 1 && orderId === "") {
                     </div>
                     <div> <p>Precio unidad: ${item.price}</p></div>
                     <div> <p>Precio total: ${item.quantity*item.price}</p></div>
+                    
                  </div>
+                 
                  )
+                 
                )}
 
            </div>
 
-         
            <div>
                 <div>
                     <label>Subtotal</label>
@@ -129,6 +137,7 @@ if(productos.lenght === 1 && orderId === "") {
                     </div>
                    
             </div>
+          
               
             {mostrarForm ? <Formulario crearOrder={crearOrder}/> : null}
         </section>

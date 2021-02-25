@@ -7,20 +7,19 @@ import {Link} from 'react-router-dom'
 
 
 const CartWidget = () => {
-    const {cartWidgetContador, isInCart} = useCartContext()
+    const {cartWidgetContador} = useCartContext()
 
     return (
         <>
        
-        {isInCart ?
+       
         <Link to= {'/carrito'} className="carrito-widget">
         <div className='carrito-icon'>
         <FontAwesomeIcon className="Cart" size="lg" icon={faShoppingCart} />
         <span className='items'>{cartWidgetContador()}</span>
         </div>
         </Link>
-        : null
-    }
+       
         
         </>
        

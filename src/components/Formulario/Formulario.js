@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Fragment } from 'react';
 
+
 const Formulario = ({ crearOrder }) => {
 
     const [form, setForm] = useState({
         name: '',
         email: '',
+        
         phone: ''
     })
 
