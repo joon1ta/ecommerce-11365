@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import firebase from 'firebase/app'
-import 'firebase/firestore'
+import '@firebase/firestore'
 import { getFirestore } from '../../firebase'
 import Formulario from '../Formulario/Formulario'
 
@@ -27,21 +27,20 @@ const handleFinalize = () => {
 
 const crearOrder = (comprador) => {
     const db = getFirestore()
-    const orders = db.collection('order')
+    const orders = db.collection('order');
 
     const newOrder = {
-        comprador,
-        productos,
+        comprador: comprador,
+        productos: productos,
         date: firebase.firestore.Timestamp.fromDate(new Date()),
-        total: priceTotal()
+        total: priceTotal(),
     }
-    orders.add(newOrder).then(({ id }) => {
-       
+   
+    orders.add(newOrder).then(({id}) => {
         setOrderId(id)
         setConfirmation(true)
      
-    }
-    ).catch((e) => {console.log(e)})
+    }).catch((e) => {console.log(e)});
        
   const Itemscollection = db.collection('items')
   const batch = getFirestore().batch()
@@ -56,11 +55,11 @@ const crearOrder = (comprador) => {
         }).catch(err=>console.log(err))
 }
 
+console.log(orderId)
 
 
-
-if(productos.lenght === 0 && orderId === "") {
-    console.log(productos)
+/*if(productos.length === 0 && orderId === "") {
+   
     return (
         <div>
             <div>
@@ -83,7 +82,7 @@ if(productos.lenght === 0 && orderId === "") {
             </div>
         </div>
     )
-}
+}*/
     return(
         <section>
            <div>
@@ -116,9 +115,8 @@ if(productos.lenght === 0 && orderId === "") {
                  )
                  
                )}
-
+           
            </div>
-
            <div>
                 <div>
                     <label>Subtotal</label>
@@ -137,11 +135,33 @@ if(productos.lenght === 0 && orderId === "") {
                     </div>
                    
             </div>
+
+         
           
-              
+                {productos.length === 0 && orderId === "" ? (
+                      <div>
+                      <div>
+                          <h3>...No hay productos agregados al Carrito...</h3>
+                          <Link to="/" exact>
+                              <button className = "btn btn-secondary">Continuar Comprando</button>
+                          </Link>
+                      </div>
+                      
+                  </div>
+                ): (
+                    <div>
+                    <div>
+                        <h3>Su Orden No. <span>{orderId}</span> ha sido confirmada</h3>
+                        <Link to="/" exact>
+                            <button className="btn btn-secondary">Continuar Comprando</button>
+                        </Link>
+                    </div>
+                </div>
+                )} 
             {mostrarForm ? <Formulario crearOrder={crearOrder}/> : null}
         </section>
-
+    
     )
 }
+
 export default Cart; 
