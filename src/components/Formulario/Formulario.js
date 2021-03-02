@@ -19,9 +19,11 @@ const Formulario = ({ crearOrder }) => {
         console.log(form)
     }
 
-    const finalizeCompra = () => {
+    const finalizeCompra = (e) => {
+        e.preventDefault()
         const { name, email, phone } = form
         crearOrder({name, email, phone})
+        
     }
 
     return (

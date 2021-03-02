@@ -35,14 +35,19 @@ const crearOrder = (comprador) => {
         date: firebase.firestore.Timestamp.fromDate(new Date()),
         total: priceTotal(),
     }
-   
+   console.log("entre al order")
     orders.add(newOrder).then(({id}) => {
+       
         setOrderId(id)
+        
         setConfirmation(true)
      
     }).catch((e) => {console.log(e)});
+
+
+
        
-  const Itemscollection = db.collection('items')
+  /*const Itemscollection = db.collection('items')
   const batch = getFirestore().batch()
 
   productos.forEach( p => {
@@ -52,10 +57,10 @@ const crearOrder = (comprador) => {
         .then(() => {
             console.log("Finalizado")
             limpiarListCart()
-        }).catch(err=>console.log(err))
+        }).catch(err=>console.log(err))*/
 }
 
-console.log(orderId)
+
 
 
 /*if(productos.length === 0 && orderId === "") {
@@ -83,7 +88,9 @@ console.log(orderId)
         </div>
     )
 }*/
-    return(
+    
+
+return(
         <section>
            <div>
                <h2>Carrito de compras</h2>
@@ -148,7 +155,7 @@ console.log(orderId)
                       </div>
                       
                   </div>
-                ): (
+                ) : (orderId && confirmation && (
                     <div>
                     <div>
                         <h3>Su Orden No. <span>{orderId}</span> ha sido confirmada</h3>
@@ -156,8 +163,8 @@ console.log(orderId)
                             <button className="btn btn-secondary">Continuar Comprando</button>
                         </Link>
                     </div>
-                </div>
-                )} 
+                    </div>
+                ))}
             {mostrarForm ? <Formulario crearOrder={crearOrder}/> : null}
         </section>
     
