@@ -3,7 +3,7 @@ import './navbar.css'
 
 import CartWidget from '../CartWidget/cartWidget'
 import {NavLink} from 'react-router-dom'
-import {Dropdown} from 'react-bootstrap'
+
 
 
 
@@ -14,13 +14,10 @@ import {Dropdown} from 'react-bootstrap'
 export const NavBar = () => {
 
 const links  = [
-  
- 
-  {nombre: 'Action', url: '/category/Action-FPS'},
-  {nombre: 'Sports', url: '/category/Sports'},
-  {nombre: 'Strategies', url: '/category/Strategies'},
-  {nombre: 'Arcade', url: '/category/Arcade'}
-  
+  {nombre: 'Ofertas', url: '/category/Ofertas'},
+  {nombre: 'Ultimos Juegos', url: '/category/UltimosJuegos'},
+  {nombre: 'Quiénes Somos', url: '/quienesSomos'},
+  {nombre: 'Contactanos', url: '/contacto'}
 ]
 
 
@@ -33,27 +30,12 @@ const links  = [
        </NavLink>
 
 
-       <ul className="nav-menu">
-       <NavLink to='/contacto' className="navBar-logo">
-         <h6>Contacto</h6>
-       </NavLink>
-       <NavLink to='/aboutUs' className="navBar-logo">
-         <h6>Quienes somos</h6>
-       </NavLink>
-       <Dropdown>
-          <Dropdown.Toggle id="dropdown-basic">
-              Categorias
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1"> {links.map((link, i) => {
-                  return (<li key={i}><NavLink className="nav-link" to={link.url}>{link.nombre}</NavLink></li>)})}
-              </Dropdown.Item>
-   
-          </Dropdown.Menu>
-       </Dropdown>
      
-         <CartWidget/>
+       
+       <ul className="nav-menu">
+          {links.map((link, i) => {
+          return (<li key={i}><NavLink className="nav-link" to={link.url}>{link.nombre}</NavLink></li>)})}
+          <CartWidget/>
        </ul>
      </nav>
     </header>     

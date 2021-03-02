@@ -22,9 +22,9 @@ const ItemCount = ({minStock,maxStock,onAdd})=> {
         <div>
             <h5>Cantidad:</h5>
             <div className="buttons" style={{display:"flex",justifyContent:"center",margin:"10px 0 10px 0"}}>
-            <button className="btn btn-primary" onClick={decrease} disabled={counter === minStock}>-</button>
+            <button  onClick={decrease} disabled={counter === minStock}>-</button>
             <h5 style={{margin:"5px 5px 0 5px"}}>{counter}</h5>
-            <button className="btn btn-primary" onClick={increase} disabled={counter === maxStock}>+</button>
+            <button onClick={increase} disabled={counter === maxStock}>+</button>
             </div>
             <p>Unidades Disponibles: { maxStock-counter }</p>
         </div>

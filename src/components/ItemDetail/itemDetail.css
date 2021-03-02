@@ -1,0 +1,10 @@
+.card-product-detail {
+    background: #ffffff;
+    border: 2px solid #A1869E;
+    width: 50%;
+   
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
+}
+

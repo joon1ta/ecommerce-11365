@@ -3,6 +3,7 @@ import ItemCount from '../ItemCount/ItemCount'
 import useCartContext from '../Context/cartContext'
 import {Link} from 'react-router-dom'
 
+
 const ItemDetail = ({item}) => {
 const minStock = 0
 const maxStock = item.stock
@@ -39,8 +40,8 @@ const agregarAlCarrito = () => {
                     minStock={minStock}
                     onAdd={cantidadItem}
         />
-       <button className="btn btn-primary" onClick={agregarAlCarrito}>Agregar al carrito</button>
-        { add ? <Link to={'/carrito'}><button className="btn btn-primary" onClick={agregarAlCarrito}>Finalizar Compra</button></Link> 
+       <button className="button-detail"  onClick={agregarAlCarrito}>Agregar al carrito</button>
+        { add ? <Link to={'/carrito'}><button className="button-detail" onClick={agregarAlCarrito}>Finalizar Compra</button></Link> 
         : null
        }
      
